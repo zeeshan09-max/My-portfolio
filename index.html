@@ -4,17 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore Zeeshanâ€™s game UI/UX design work, creative projects, and journey into web development.">
+    <meta name="description" content="Zeeshan is an aspiring full stack web developer learning HTML, CSS, JavaScript and Python. Explore his skills, learning journey and ways to connect.">
     <meta name="theme-color" content="#080b14">
-    <title>Zeeshan | Digital Designer & Aspiring Web Developer</title>
+    <title>ZeeCode | Aspiring Full Stack Web Developer</title>
+    <!-- Phase 8: SEO and social sharing. Replace the preview URL if the deployment path changes. -->
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Zeeshan">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="ZeeCode | Developer Portfolio">
+    <meta property="og:title" content="ZeeCode | Aspiring Full Stack Web Developer">
+    <meta property="og:description" content="Building responsive web experiences with HTML, CSS and JavaScript while learning Python and full-stack development.">
+    <meta property="og:image" content="https://zeeshan09-max.github.io/My-portfolio/social-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ZeeCode — Aspiring Full Stack Web Developer. I learn. I code. I build.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ZeeCode | Aspiring Full Stack Web Developer">
+    <meta name="twitter:description" content="Frontend foundations, Python practice, and a journey toward full-stack web development.">
+    <meta name="twitter:image" content="https://zeeshan09-max.github.io/My-portfolio/social-preview.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <script type="application/ld+json">{
+      "@context":"https://schema.org",
+      "@type":"Person",
+      "name":"Zeeshan",
+      "alternateName":"ZeeCode",
+      "description":"Aspiring full stack web developer learning frontend development and Python",
+      "email":"mailto:zm4883179@gmail.com",
+      "sameAs":["https://github.com/zeeshan09-max"],
+      "knowsAbout":["HTML","CSS","JavaScript","Python","Responsive web design"]
+    }</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="zeecode-mark.svg" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a class="skip-link" href="#home">Skip to content</a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header">
         <nav class="navbar" aria-label="Main navigation">
-            <a href="#home" class="logo" aria-label="Zeeshan â€” Home">Zeeshan<span>.</span></a>
+            <a href="#home" class="logo zeecode-brand" aria-label="ZeeCode — Home"><img src="zeecode-mark.svg" width="80" height="46" alt="" class="zeecode-mark" decoding="async"><span class="zeecode-wordmark"><span class="zeecode-zee">Zee</span><span class="zeecode-code">Code</span></span></a>
             <div class="nav-links" id="primary-navigation">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
@@ -23,9 +57,15 @@
                 <a href="#contact">Contact</a>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Change theme">
-                    <span class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></span>
-                    <span class="theme-label">Light Mode</span>
+                <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Color theme: Dark. Switch to Light" title="Drag or tap to change theme">
+                    <span class="theme-track" aria-hidden="true">
+                        <span class="theme-side theme-side-dark">Dark</span>
+                        <span class="theme-side theme-side-light">Light</span>
+                        <span class="theme-thumb">
+                            <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.7 13.1A9 9 0 0 1 10.9 3.3 9 9 0 1 0 20.7 13.1Z"/></svg>
+                            <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+                        </span>
+                    </span>
                 </button>
                 <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false">
                     <span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
@@ -34,32 +74,32 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <section class="hero" id="home" aria-labelledby="hero-heading">
             <div class="hero-content">
-                <p class="tag hero-eyebrow"><span class="status-pulse" aria-hidden="true"></span> DIGITAL DESIGNER <span class="eyebrow-separator" aria-hidden="true">/</span> ASPIRING WEB DEVELOPER</p>
-                <h1 id="hero-heading">I imagine.<br><span>I design.</span><br>I build<span class="hero-period">.</span></h1>
-                <p class="description">A designer at heart, an aspiring web developer by passion. I create digital experiences and explore the space where creativity and technology meet.</p>
+                <p class="tag hero-eyebrow"><span class="status-pulse" aria-hidden="true"></span> ASPIRING FULL STACK WEB DEVELOPER <span class="eyebrow-separator" aria-hidden="true">/</span> BUILDING & LEARNING</p>
+                <h1 id="hero-heading">I learn.<br><span>I code.</span><br>I build<span class="hero-period">.</span></h1>
+                <p class="description">I'm building my skills in frontend development and Python, with a clear goal: creating reliable, responsive, full-stack web applications. Follow my projects as I learn by building.</p>
                 <div class="buttons hero-buttons">
-                    <a href="#projects" class="btn primary">Explore My Work <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                    <a href="#projects" class="btn primary">View My Projects <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
                     <a href="#about" class="btn secondary">About Me <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></a>
                 </div>
-                <div class="hero-proof" aria-label="Creative specialties"><span>GAME UI / UX</span><span aria-hidden="true" class="proof-dot"></span><span>VISUAL DESIGN</span><span aria-hidden="true" class="proof-dot"></span><span>WEB DEVELOPMENT</span></div>
+                <div class="hero-proof" aria-label="Development focus"><span>HTML & CSS</span><span aria-hidden="true" class="proof-dot"></span><span>JAVASCRIPT</span><span aria-hidden="true" class="proof-dot"></span><span>PYTHON</span></div>
             </div>
             <div class="visual hero-workspace" aria-label="Illustration of a creative design workspace and a code editor">
                 <div class="workspace-glow" aria-hidden="true"></div>
                 <div class="workspace-grid" aria-hidden="true"></div>
                 <div class="workspace-card design-card">
-                    <div class="workspace-card-top"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>creative-studio.fig</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></div>
+                    <div class="workspace-card-top"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>web-layout.fig</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></div>
                     <div class="design-canvas"><div class="design-blob blob-one"></div><div class="design-blob blob-two"></div><div class="design-orbit orbit-one"></div><div class="design-orbit orbit-two"></div><div class="design-shape"><span class="shape-eye"></span><span class="shape-eye"></span></div><div class="design-selection" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
-                    <div class="workspace-card-bottom"><span class="canvas-chip">DESIGN SYSTEM</span><span>100%</span></div>
+                    <div class="workspace-card-bottom"><span class="canvas-chip">UI COMPONENTS</span><span>100%</span></div>
                 </div>
                 <div class="workspace-card editor-card">
-                    <div class="workspace-card-top"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>portfolio.js</span><span class="editor-status">â—</span></div>
-                    <div class="editor-lines" aria-hidden="true"><div><span class="line-no">01</span><span class="syntax-purple">const</span> <span class="syntax-blue">creator</span> = {</div><div><span class="line-no">02</span>&nbsp; passion: <span class="syntax-green">'design'</span>,</div><div><span class="line-no">03</span>&nbsp; mindset: <span class="syntax-green">'build'</span>,</div><div><span class="line-no">04</span>&nbsp; learning: <span class="syntax-purple">true</span></div><div><span class="line-no">05</span>};</div></div>
+                    <div class="workspace-card-top"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>portfolio.js</span><span class="editor-status" aria-hidden="true"><span class="editor-status-dot"></span></span></div>
+                    <div class="editor-lines" aria-hidden="true"><div><span class="line-no">01</span><span class="syntax-purple">const</span> <span class="syntax-blue">creator</span> = {</div><div><span class="line-no">02</span>&nbsp; focus: <span class="syntax-green">'web'</span>,</div><div><span class="line-no">03</span>&nbsp; mindset: <span class="syntax-green">'build'</span>,</div><div><span class="line-no">04</span>&nbsp; learning: <span class="syntax-purple">true</span></div><div><span class="line-no">05</span>};</div></div>
                     <div class="editor-footer"><span class="editor-light"></span> Exploring possibilities <span class="editor-cursor" aria-hidden="true"></span></div>
                 </div>
-                <div class="workspace-badge badge-design" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 7l8 4 8-4-8-4Zm-8 9 8 4 8-4M4 17l8 4 8-4"/></svg><span>Design first</span></div>
+                <div class="workspace-badge badge-design" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 7l8 4 8-4-8-4Zm-8 9 8 4 8-4M4 17l8 4 8-4"/></svg><span>Build with purpose</span></div>
                 <div class="workspace-badge badge-code" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-12-2 16"/></svg><span>Always learning</span></div>
             </div>
         </section>
@@ -68,38 +108,38 @@
             <div class="about-intro">
                 <div class="about-lead">
                     <p class="tag">01 / THE PERSON BEHIND THE WORK</p>
-                    <h2 id="about-heading">A creative mind,<br><span>always evolving.</span></h2>
+                    <h2 id="about-heading">Learning to build.<br><span>Growing with code.</span></h2>
                     <div class="about-accent-line" aria-hidden="true"></div>
                 </div>
                 <div class="about-story">
-                    <p class="about-kicker">DESIGN IS MY FOUNDATION. CURIOSITY DRIVES WHAT'S NEXT.</p>
-                    <p>I'm a digital designer with a focus on game UI/UX, level design and visual experiences. I enjoy turning ideas into interfaces that feel thoughtful, clear and engaging.</p>
-                    <p>Now I'm expanding that creative foundation into web development &mdash; learning HTML, CSS, JavaScript and Python, and discovering how design and code can work together.</p>
+                    <p class="about-kicker">FRONTEND FOUNDATIONS. FULL-STACK AMBITIONS.</p>
+                    <p>I'm an aspiring full-stack web developer currently practicing HTML, CSS, JavaScript and Python. I enjoy turning ideas into responsive interfaces and understanding how applications work behind the scenes.</p>
+                    <p>My background in visual design helps me pay attention to usability and detail, but my career focus is web development. I'm working toward backend development, databases and complete applications through hands-on projects.</p>
                     <a class="about-text-link" href="#skills">Explore my skills <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
                 </div>
             </div>
             <div class="journey-heading">
-                <div><p class="tag">MY CREATIVE JOURNEY</p><h3>Built on design.<br><span>Driven by growth.</span></h3></div>
-                <p>Three connected parts of how I think, create and keep moving forward.</p>
+                <div><p class="tag">MY DEVELOPMENT ROADMAP</p><h3>From foundations.<br><span>To full-stack.</span></h3></div>
+                <p>My learning path: strengthening the frontend, exploring the backend and building complete applications.</p>
             </div>
             <div class="journey-grid" aria-label="My creative journey">
                 <article class="journey-step">
                     <div class="journey-step-top"><span class="journey-number">01</span><span class="journey-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 18l9 5 9-5"/></svg></span></div>
-                    <p class="journey-type">THE FOUNDATION</p><h4>Design</h4>
-                    <p>Game interfaces, level design and visual storytelling â€” creating experiences with purpose and personality.</p>
-                    <span class="journey-tags">UI / UX &nbsp;Â·&nbsp; GAME DESIGN</span>
+                    <p class="journey-type">CURRENT FOCUS</p><h4>Frontend</h4>
+                    <p>Building responsive layouts, accessible interfaces and interactive experiences with HTML, CSS and JavaScript.</p>
+                    <span class="journey-tags">HTML &nbsp;&middot;&nbsp; CSS &nbsp;&middot;&nbsp; JAVASCRIPT</span>
                 </article>
                 <article class="journey-step">
                     <div class="journey-step-top"><span class="journey-number">02</span><span class="journey-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-12-2 16"/></svg></span></div>
-                    <p class="journey-type">THE NEW CHAPTER</p><h4>Development</h4>
-                    <p>Learning to bring ideas to life in the browser through clean structure, responsive styling and code.</p>
-                    <span class="journey-tags">HTML / CSS &nbsp;Â·&nbsp; JS &nbsp;Â·&nbsp; PYTHON</span>
+                    <p class="journey-type">LEARNING NEXT</p><h4>Backend</h4>
+                    <p>Developing Python fundamentals and preparing to learn server-side logic, APIs and databases.</p>
+                    <span class="journey-tags">PYTHON &nbsp;&middot;&nbsp; APIS &nbsp;&middot;&nbsp; DATABASES</span>
                 </article>
                 <article class="journey-step">
                     <div class="journey-step-top"><span class="journey-number">03</span><span class="journey-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 10 11l4 4 6-8M14 7h6v6"/></svg></span></div>
-                    <p class="journey-type">THE MINDSET</p><h4>Evolve</h4>
-                    <p>Combining creative thinking and technical skills, experimenting, refining and growing with every project.</p>
-                    <span class="journey-tags">CREATE &nbsp;Â·&nbsp; LEARN &nbsp;Â·&nbsp; IMPROVE</span>
+                    <p class="journey-type">LONG-TERM GOAL</p><h4>Full Stack</h4>
+                    <p>Connecting frontend and backend skills to create useful, maintainable end-to-end web applications.</p>
+                    <span class="journey-tags">BUILD &nbsp;&middot;&nbsp; TEST &nbsp;&middot;&nbsp; DEPLOY</span>
                 </article>
             </div>
         </section>
@@ -107,72 +147,127 @@
         <section class="section skills-section" id="skills" aria-labelledby="skills-heading">
             <div class="skills-header">
                 <div>
-                    <p class="tag">MY TOOLKIT & GROWTH</p>
-                    <h2 id="skills-heading">Where creativity<br><span>meets technology.</span></h2>
+                    <p class="tag">DEVELOPMENT SKILLS & LEARNING</p>
+                    <h2 id="skills-heading">Skills I'm building.<br><span>Code I'm practicing.</span></h2>
                 </div>
-                <p class="skills-intro">A strong creative foundation, paired with an evolving development toolkit. Explore what I use and what I'm learning.</p>
+                <p class="skills-intro">Frontend technologies and Python are my current focus. I also bring visual design experience to the interfaces I build.</p>
             </div>
             <div class="skills-tabs" role="group" aria-label="Skill categories">
-                <button type="button" class="skills-tab is-active" data-skill-filter="design" aria-pressed="true">Design & Creative <span>06</span></button>
-                <button type="button" class="skills-tab" data-skill-filter="development" aria-pressed="false">Development <span>04</span></button>
+                <button type="button" class="skills-tab is-active" data-skill-filter="development" aria-pressed="true">Development <span>04</span></button>
+                <button type="button" class="skills-tab" data-skill-filter="design" aria-pressed="false">Design Background <span>06</span></button>
             </div>
             <div class="skills-layout">
                 <div class="skills-collection" aria-label="Choose a skill">
-                    <div class="skills-list" data-skill-group="design">
-                        <button type="button" class="skill-tile is-selected" data-skill="game-ui" aria-pressed="true"><span class="skill-tile-index">01</span><span>Game UI / UX</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="level-design" aria-pressed="false"><span class="skill-tile-index">02</span><span>Level Design</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="photoshop" aria-pressed="false"><span class="skill-tile-index">03</span><span>Photoshop</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="illustrator" aria-pressed="false"><span class="skill-tile-index">04</span><span>Illustrator</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="figma" aria-pressed="false"><span class="skill-tile-index">05</span><span>Figma</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="unity-blender" aria-pressed="false"><span class="skill-tile-index">06</span><span>Unity & Blender</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
+                    <div class="skills-list" data-skill-group="design" hidden>
+                        <button type="button" class="skill-tile" data-skill="game-ui" aria-pressed="false"><span class="skill-tile-index">01</span><span>Game UI / UX</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="level-design" aria-pressed="false"><span class="skill-tile-index">02</span><span>Level Design</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="photoshop" aria-pressed="false"><span class="skill-tile-index">03</span><span>Photoshop</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="illustrator" aria-pressed="false"><span class="skill-tile-index">04</span><span>Illustrator</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="figma" aria-pressed="false"><span class="skill-tile-index">05</span><span>Figma</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="unity-blender" aria-pressed="false"><span class="skill-tile-index">06</span><span>Unity & Blender</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
                     </div>
-                    <div class="skills-list" data-skill-group="development" hidden>
-                        <button type="button" class="skill-tile" data-skill="html" aria-pressed="false"><span class="skill-tile-index">01</span><span>HTML</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="css" aria-pressed="false"><span class="skill-tile-index">02</span><span>CSS</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="javascript" aria-pressed="false"><span class="skill-tile-index">03</span><span>JavaScript</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
-                        <button type="button" class="skill-tile" data-skill="python" aria-pressed="false"><span class="skill-tile-index">04</span><span>Python</span><span class="skill-tile-arrow" aria-hidden="true">&nearr;</span></button>
+                    <div class="skills-list" data-skill-group="development">
+                        <button type="button" class="skill-tile is-selected" data-skill="html" aria-pressed="true"><span class="skill-tile-index">01</span><span>HTML</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="css" aria-pressed="false"><span class="skill-tile-index">02</span><span>CSS</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="javascript" aria-pressed="false"><span class="skill-tile-index">03</span><span>JavaScript</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+                        <button type="button" class="skill-tile" data-skill="python" aria-pressed="false"><span class="skill-tile-index">04</span><span>Python</span><span class="skill-tile-arrow" aria-hidden="true"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
                     </div>
                 </div>
                 <article class="skill-spotlight" aria-labelledby="skill-spotlight-title">
-                    <div class="spotlight-top"><span class="spotlight-overline">SKILL SPOTLIGHT</span><span class="spotlight-mark" aria-hidden="true">&#10035;</span></div>
-                    <p class="spotlight-status" id="skill-spotlight-status">DESIGN FOUNDATION</p>
-                    <h3 id="skill-spotlight-title">Game UI / UX</h3>
-                    <p class="spotlight-description" id="skill-spotlight-description">Designing clear, engaging game interfaces with a focus on visual hierarchy, readability, and player experience.</p>
-                    <div class="spotlight-footer"><span>MY CREATIVE TOOLKIT</span><span aria-hidden="true">&nearr;</span></div>
+                    <div class="spotlight-top"><span class="spotlight-overline">DEVELOPMENT SKILL</span><span class="spotlight-mark" aria-hidden="true"><svg class="ui-icon ui-icon-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.5 14.4 9.6 21.5 12l-7.1 2.4L12 21.5l-2.4-7.1L2.5 12l7.1-2.4L12 2.5Z"/></svg></span></div>
+                    <p class="spotlight-status" id="skill-spotlight-status">DEVELOPMENT - LEARNING</p>
+                    <h3 id="skill-spotlight-title">HTML</h3>
+                    <p class="spotlight-description" id="skill-spotlight-description">Learning to structure semantic, accessible web pages and meaningful content.</p>
+                    <div class="spotlight-footer"><span>MY DEVELOPMENT TOOLKIT</span><span aria-hidden="true" class="spotlight-footer-icon"><svg class="ui-icon ui-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
                 </article>
             </div>
-            <p class="skills-footnote">Currently exploring more of web development, including future plans for Flask and databases.</p>
+            <p class="skills-footnote">Currently learning and practicing. Backend frameworks, APIs and databases are on my roadmap, not claimed as completed skills.</p>
         </section>
 
         <section class="section" id="projects">
-            <p class="tag">MY WORK</p>
-            <h2>Projects in progress.</h2>
+            <p class="tag">DEVELOPMENT PROJECTS</p>
+            <h2>Learning through projects.</h2>
 
             <div class="project-grid">
                 <article class="project-card">
                     <span>01 / PYTHON</span>
                     <h3>Shopping Bill Generator</h3>
-                    <p>A Python program for calculating totals and discounts.</p>
+                    <p>A Python practice project that calculates shopping totals and discounts using programming fundamentals.</p>
                 </article>
 
                 <article class="project-card">
-                    <span>02 / WEB DESIGN</span>
+                    <span>02 / FRONTEND</span>
                     <h3>Portfolio Website</h3>
-                    <p>A responsive personal website built with HTML and CSS.</p>
+                    <p>This responsive portfolio uses HTML, CSS and JavaScript, with interactive skills, accessible navigation and a saved theme preference.</p>
                 </article>
             </div>
         </section>
 
-        <section class="section contact" id="contact">
-            <p class="tag">LET'S CONNECT</p>
-            <h2>Every expert was<br><span>once a beginner.</span></h2>
-            <a class="btn primary" href="mailto:your-email@example.com">
-                Contact Me <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            </a>
+        <!-- Phase 6: accessible, client-focused contact section. -->
+        <section class="section contact" id="contact" aria-labelledby="contact-heading">
+            <div class="contact-heading">
+                <div>
+                    <p class="tag">06 / LET'S CONNECT</p>
+                    <h2 id="contact-heading">Have an opportunity?<br><span>Let's talk.</span></h2>
+                </div>
+                <p class="contact-intro">I'm learning and building toward full-stack web development, and I'm open to internships and junior developer opportunities. If my skills could be a fit, I'd love to hear from you.</p>
+            </div>
+
+            <div class="contact-layout">
+                <aside class="contact-details" aria-label="Contact details">
+                    <div class="contact-availability"><span class="contact-status-dot" aria-hidden="true"></span> Open to internships &amp; junior roles</div>
+                    <h3>Start a conversation.</h3>
+                    <p>Reach out directly by email or explore the code behind my learning journey on GitHub.</p>
+
+                    <a class="contact-method" href="mailto:zm4883179@gmail.com">
+                        <span class="contact-method-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                        <span class="contact-method-copy"><span class="contact-method-label">EMAIL ME</span><strong>zm4883179@gmail.com</strong></span>
+                        <svg class="contact-method-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </a>
+                    <a class="contact-method" href="https://github.com/zeeshan09-max" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-method-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.06c-3.09.67-3.74-1.31-3.74-1.31-.5-1.29-1.23-1.63-1.23-1.63-1.01-.69.08-.67.08-.67 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.71-1.49-2.47-.28-5.06-1.23-5.06-5.49 0-1.21.43-2.2 1.14-2.97-.11-.28-.5-1.41.11-2.94 0 0 .93-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.12-1.44 3.05-1.14 3.05-1.14.61 1.53.22 2.66.11 2.94.71.77 1.14 1.76 1.14 2.97 0 4.27-2.6 5.2-5.08 5.48.4.35.75 1.02.75 2.06V22c0 .3.2.64.77.53A11.1 11.1 0 0 0 12 .9Z"/></svg></span>
+                        <span class="contact-method-copy"><span class="contact-method-label">GITHUB</span><strong>github.com/zeeshan09-max</strong></span>
+                        <svg class="contact-method-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </a>
+                    <p class="contact-note">Currently growing my development skills and actively looking for opportunities to learn and contribute.</p>
+                </aside>
+
+                <div class="contact-form-panel">
+                    <div class="contact-form-heading"><span class="contact-form-overline">SEND A MESSAGE</span><h3>Tell me what you have in mind.</h3><p>Fill in the details and your email app will open with the message ready to send.</p></div>
+                    <!-- No backend is configured. The form creates a prefilled mailto draft, never claims server delivery. -->
+                    <form id="contact-form" class="contact-form" action="mailto:zm4883179@gmail.com" method="get">
+                        <div class="contact-field-row">
+                            <div class="contact-field"><label for="contact-name">Your name <span aria-hidden="true">*</span></label><input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Your full name" required></div>
+                            <div class="contact-field"><label for="contact-email">Email address <span aria-hidden="true">*</span></label><input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required></div>
+                        </div>
+                        <div class="contact-field"><label for="contact-subject">Subject <span aria-hidden="true">*</span></label><input id="contact-subject" name="subject" type="text" maxlength="150" placeholder="Internship, junior role, or collaboration" required></div>
+                        <div class="contact-field"><label for="contact-message">Your message <span aria-hidden="true">*</span></label><textarea id="contact-message" name="message" rows="5" minlength="10" maxlength="3000" placeholder="Tell me about the opportunity..." required></textarea></div>
+                        <button class="btn primary contact-submit" type="submit">Prepare Email <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
+                        <p class="contact-form-feedback" id="contact-form-feedback" role="status" aria-live="polite">Your email application is required to send the message. Nothing is sent automatically.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- WhatsApp is an external contact option; no tracking script or SDK is required. -->
+        <section class="section whatsapp-section" id="whatsapp" aria-labelledby="whatsapp-heading">
+            <div class="whatsapp-panel">
+                <div class="whatsapp-content">
+                    <p class="tag">07 / QUICK CONNECT</p>
+                    <h2 id="whatsapp-heading">Prefer a quick chat?<br><span>Message me on WhatsApp.</span></h2>
+                    <p>Have an internship, junior developer opportunity, or collaboration in mind? Reach out directly on WhatsApp.</p>
+                    <div class="whatsapp-number"><span>WhatsApp</span><strong>+92 347 3488029</strong></div>
+                </div>
+                <a class="whatsapp-button" href="https://wa.me/923473488029" target="_blank" rel="noopener noreferrer" aria-label="Chat with Zeeshan on WhatsApp (opens in a new tab)">
+                    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16 .8A15.2 15.2 0 0 0 3.1 24l-2 7.2 7.4-1.9A15.2 15.2 0 1 0 16 .8Zm0 27.6a12.3 12.3 0 0 1-6.3-1.7l-.5-.3-4.4 1.1 1.2-4.2-.3-.5A12.3 12.3 0 1 1 16 28.4Zm6.8-9.2c-.4-.2-2.3-1.1-2.6-1.2-.4-.1-.6-.2-.9.2-.3.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7.4-.6c.1-.2 0-.5 0-.7l-1.2-2.8c-.3-.7-.6-.6-.9-.6h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.5 3.9 1.7 4.2c.2.3 2.9 4.5 7.1 6.3 1 .4 1.8.6 2.4.8 1 .3 1.9.2 2.6.1.8-.1 2.3-1 2.6-2 .3-1 .3-1.9.2-2-.1-.2-.3-.3-.7-.5Z"/></svg>
+                    <span>Chat on WhatsApp</span>
+                    <svg class="whatsapp-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                </a>
+            </div>
         </section>
     </main>
 
-    <footer>Â© 2026 Zeeshan. Built with curiosity.</footer>
+    <footer>&copy; 2026 ZeeCode. Learning, building and improving.</footer>
 
     <script src="script.js" defer></script>
 </body>

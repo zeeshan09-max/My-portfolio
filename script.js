@@ -1,153 +1,123 @@
-
 "use strict";
 
-// Portfolio: Phase 1 to Phase 4
-// Theme, navigation, skills and repeat-scroll animations.
-
+/**
+ * Portfolio interactions.
+ * Each initializer owns one feature, keeping event listeners and state isolated.
+ * No third-party JavaScript dependencies are required.
+ */
 document.documentElement.classList.add("js");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const root = document.documentElement;
+const THEME_STORAGE_KEY = "portfolio-theme";
+const MOBILE_NAV_QUERY = "(min-width: 761px)";
 
-    // =========================
-    // THEME TOGGLE
-    // =========================
-
-    const themeButton = document.querySelector(".theme-toggle");
-    const themeIcon = document.querySelector(".theme-icon");
-    const themeLabel = document.querySelector(".theme-label");
-    const themeMeta = document.querySelector('meta[name="theme-color"]');
-
-    const sunSvg = `<svg viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="1.8"
-        stroke-linecap="round" stroke-linejoin="round"
-        aria-hidden="true">
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
-    </svg>`;
-
-    const moonSvg = `<svg viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="1.8"
-        stroke-linecap="round" stroke-linejoin="round"
-        aria-hidden="true">
-        <path d="M20.7 13.1A9 9 0 0 1 10.9 3.3 9 9 0 1 0 20.7 13.1Z"/>
-    </svg>`;
-
-    const preferredTheme = window.matchMedia(
-        "(prefers-color-scheme: light)"
-    );
-
-    let savedTheme = null;
-
+/** Read a stored preference without breaking in restricted/private contexts. */
+function readThemePreference() {
     try {
-        savedTheme = localStorage.getItem("portfolio-theme");
-    } catch (error) {
-        // Storage is optional.
+        const value = localStorage.getItem(THEME_STORAGE_KEY);
+        return value === "dark" || value === "light" ? value : null;
+    } catch {
+        return null;
+    }
+}
+
+function saveThemePreference(theme) {
+    try {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+        // The switch remains usable when browser storage is unavailable.
+    }
+}
+
+/**
+ * Synchronize visual theme, accessible switch state, and browser toolbar color.
+ * The switch represents the CURRENT mode: checked means light.
+ */
+function initTheme() {
+    const root = document.documentElement;
+    const switchButton = document.querySelector(".theme-toggle");
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)");
+
+    function setTheme(theme, persist = false) {
+        const isLight = theme === "light";
+        root.dataset.theme = isLight ? "light" : "dark";
+        switchButton?.setAttribute("aria-checked", String(isLight));
+        switchButton?.setAttribute("aria-label", `Color theme: ${isLight ? "Light" : "Dark"}. Switch to ${isLight ? "Dark" : "Light"}`);
+        if (themeMeta) themeMeta.content = isLight ? "#f7f9fd" : "#080b14";
+        if (persist) saveThemePreference(theme);
     }
 
-    const initialTheme =
-        savedTheme === "dark" || savedTheme === "light"
-            ? savedTheme
-            : preferredTheme.matches ? "light" : "dark";
+    setTheme(readThemePreference() ?? (systemPrefersLight.matches ? "light" : "dark"));
+    if (!switchButton) return;
 
-    function applyTheme(theme) {
-        root.dataset.theme = theme;
+    let pointerStart = null;
+    let suppressNextClick = false;
 
-        const isDark = theme === "dark";
-
-        if (themeButton) {
-            themeButton.setAttribute(
-                "aria-label",
-                isDark
-                    ? "Switch to light theme"
-                    : "Switch to dark theme"
-            );
-        }
-
-        if (themeIcon) {
-            themeIcon.innerHTML = isDark ? sunSvg : moonSvg;
-        }
-
-        if (themeLabel) {
-            themeLabel.textContent = isDark
-                ? "Light Mode"
-                : "Dark Mode";
-        }
-
-        if (themeMeta) {
-            themeMeta.content = isDark
-                ? "#080b14"
-                : "#f7f9fd";
-        }
-    }
-
-    applyTheme(initialTheme);
-
-    themeButton?.addEventListener("click", () => {
-        const nextTheme =
-            root.dataset.theme === "dark" ? "light" : "dark";
-
-        applyTheme(nextTheme);
-
-        try {
-            localStorage.setItem("portfolio-theme", nextTheme);
-        } catch (error) {
-            // Continue without saving.
-        }
+    switchButton.addEventListener("pointerdown", event => {
+        if (event.button !== 0 || !event.isPrimary) return;
+        pointerStart = { id: event.pointerId, x: event.clientX };
+        suppressNextClick = false;
+        switchButton.setPointerCapture?.(event.pointerId);
     });
 
-    // =========================
-    // MOBILE NAVIGATION
-    // =========================
+    switchButton.addEventListener("pointerup", event => {
+        if (!pointerStart || pointerStart.id !== event.pointerId) return;
+        const moved = Math.abs(event.clientX - pointerStart.x) > 7;
+        pointerStart = null;
+        if (!moved) return; // Ordinary clicks are handled by the click listener.
 
+        // A drag chooses the side on which the pointer is released.
+        const rect = switchButton.getBoundingClientRect();
+        setTheme(event.clientX < rect.left + rect.width / 2 ? "dark" : "light", true);
+        suppressNextClick = true; // Avoid a second toggle from the synthetic click.
+    });
+
+    switchButton.addEventListener("pointercancel", () => {
+        pointerStart = null;
+    });
+
+    switchButton.addEventListener("click", event => {
+        if (event.detail === 0) suppressNextClick = false; // Keyboard activation.
+        if (suppressNextClick) {
+            suppressNextClick = false;
+            return;
+        }
+        setTheme(root.dataset.theme === "light" ? "dark" : "light", true);
+    });
+}
+
+/** Mobile menu state stays in sync with ARIA and desktop breakpoints. */
+function initNavigation() {
     const menuButton = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector(".nav-links");
+    if (!menuButton || !navLinks) return;
 
-    function closeMenu() {
-        if (!menuButton || !navLinks) return;
-
-        navLinks.classList.remove("is-open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.setAttribute("aria-label", "Open navigation menu");
-    }
-
-    menuButton?.addEventListener("click", () => {
-        if (!navLinks) return;
-
-        const isOpen = navLinks.classList.toggle("is-open");
-
+    function setMenuOpen(isOpen) {
+        navLinks.classList.toggle("is-open", isOpen);
         menuButton.setAttribute("aria-expanded", String(isOpen));
-        menuButton.setAttribute(
-            "aria-label",
-            isOpen ? "Close navigation menu" : "Open navigation menu"
-        );
-    });
-
-    navLinks?.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", closeMenu);
-    });
-
-    document.addEventListener("keydown", event => {
-        if (event.key === "Escape") closeMenu();
-    });
-
-    const desktopQuery = window.matchMedia("(min-width: 761px)");
-
-    if (desktopQuery.addEventListener) {
-        desktopQuery.addEventListener("change", event => {
-            if (event.matches) closeMenu();
-        });
-    } else if (desktopQuery.addListener) {
-        desktopQuery.addListener(event => {
-            if (event.matches) closeMenu();
-        });
+        menuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
     }
 
-    // =========================
-    // INTERACTIVE SKILLS
-    // =========================
+    menuButton.addEventListener("click", () => {
+        setMenuOpen(!navLinks.classList.contains("is-open"));
+    });
+    navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => setMenuOpen(false));
+    });
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") setMenuOpen(false);
+    });
 
-    const skillDetails = {
+    const desktop = window.matchMedia(MOBILE_NAV_QUERY);
+    const onViewportChange = event => {
+        if (event.matches) setMenuOpen(false);
+    };
+    if (desktop.addEventListener) desktop.addEventListener("change", onViewportChange);
+    else desktop.addListener(onViewportChange); // Legacy browser support.
+}
+
+/** Details are content data, separate from event handlers and DOM operations. */
+const SKILL_DETAILS = {
         "game-ui": [
             "Game UI / UX",
             "DESIGN FOUNDATION",
@@ -198,142 +168,140 @@ document.addEventListener("DOMContentLoaded", () => {
             "DEVELOPMENT - LEARNING",
             "Developing programming fundamentals through practical exercises and small projects."
         ]
-    };
+};
 
-    const skillTabs = document.querySelectorAll("[data-skill-filter]");
-    const skillGroups = document.querySelectorAll("[data-skill-group]");
-    const skillTiles = document.querySelectorAll("[data-skill]");
-
-    const spotlightTitle = document.querySelector("#skill-spotlight-title");
-    const spotlightStatus = document.querySelector("#skill-spotlight-status");
-    const spotlightDescription = document.querySelector("#skill-spotlight-description");
+/** Update selected skill and its accessible detail panel. */
+function initSkills() {
+    const tabs = [...document.querySelectorAll("[data-skill-filter]")];
+    const groups = [...document.querySelectorAll("[data-skill-group]")];
+    const tiles = [...document.querySelectorAll("[data-skill]")];
+    const title = document.querySelector("#skill-spotlight-title");
+    const status = document.querySelector("#skill-spotlight-status");
+    const description = document.querySelector("#skill-spotlight-description");
 
     function selectSkill(id) {
-        const details = skillDetails[id];
+        const details = SKILL_DETAILS[id];
         if (!details) return;
-
-        skillTiles.forEach(tile => {
+        tiles.forEach(tile => {
             const selected = tile.dataset.skill === id;
-
             tile.classList.toggle("is-selected", selected);
             tile.setAttribute("aria-pressed", String(selected));
         });
-
-        if (spotlightTitle) spotlightTitle.textContent = details[0];
-        if (spotlightStatus) spotlightStatus.textContent = details[1];
-        if (spotlightDescription) spotlightDescription.textContent = details[2];
+        if (title) title.textContent = details[0];
+        if (status) status.textContent = details[1];
+        if (description) description.textContent = details[2];
     }
 
-    skillTabs.forEach(tab => {
+    tabs.forEach(tab => {
         tab.addEventListener("click", () => {
             const category = tab.dataset.skillFilter;
+            const activeGroup = groups.find(group => group.dataset.skillGroup === category);
+            if (!activeGroup) return;
 
-            skillTabs.forEach(button => {
-                const active = button === tab;
-
-                button.classList.toggle("is-active", active);
-                button.setAttribute("aria-pressed", String(active));
+            tabs.forEach(item => {
+                const selected = item === tab;
+                item.classList.toggle("is-active", selected);
+                item.setAttribute("aria-pressed", String(selected));
             });
-
-            skillGroups.forEach(group => {
-                group.hidden = group.dataset.skillGroup !== category;
+            groups.forEach(group => {
+                group.hidden = group !== activeGroup;
             });
-
-            const first = document.querySelector(
-                `[data-skill-group="${category}"] [data-skill]`
-            );
-
-            if (first) selectSkill(first.dataset.skill);
+            const firstTile = activeGroup.querySelector("[data-skill]");
+            if (firstTile) selectSkill(firstTile.dataset.skill);
         });
     });
 
-    skillTiles.forEach(tile => {
-        tile.addEventListener("click", () => {
-            selectSkill(tile.dataset.skill);
-        });
+    tiles.forEach(tile => {
+        tile.addEventListener("click", () => selectSkill(tile.dataset.skill));
     });
+}
 
-    // =========================
-    // REPEAT SCROLL ANIMATIONS
-    // =========================
-
-    const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (reducedMotion || !("IntersectionObserver" in window)) {
-        return;
-    }
+/**
+ * Reveal effects are progressive enhancement: content remains visible when
+ * motion is reduced or IntersectionObserver is unavailable.
+ */
+function initScrollAnimations() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        !("IntersectionObserver" in window)) return;
 
     const sections = document.querySelectorAll("main > .section");
+    sections.forEach(section => {
+        section.classList.add("scroll-reveal");
+        section.querySelectorAll(".project-card, .journey-step").forEach((card, index) => {
+            card.classList.add("card-reveal");
+            card.style.setProperty("--card-delay", `${index * 120}ms`);
+        });
+    });
 
-    const observer = new IntersectionObserver(entries => {
+    const tiles = document.querySelectorAll(".skill-tile");
+    tiles.forEach(tile => tile.classList.add("skill-reveal"));
+    document.documentElement.classList.add("motion-ready");
+
+    const sectionObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            const section = entry.target;
             const visible = entry.isIntersecting;
-
-            section.classList.toggle("is-visible", visible);
-
-            section.querySelectorAll(".card-reveal").forEach(card => {
+            entry.target.classList.toggle("is-visible", visible);
+            entry.target.querySelectorAll(".card-reveal").forEach(card => {
                 card.classList.toggle("is-visible", visible);
             });
         });
-    }, {
-        threshold: 0,
-        rootMargin: "-10% 0px -10% 0px"
-    });
-
-    sections.forEach(section => {
-        section.classList.add("scroll-reveal");
-
-        section.querySelectorAll(
-            ".project-card, .journey-step"
-        ).forEach((card, index) => {
-            card.classList.add("card-reveal");
-
-            card.style.setProperty(
-                "--card-delay",
-                `${index * 120}ms`
-            );
-        });
-
-        observer.observe(section);
-    });
-
-    // Skill tiles animate independently.
-    const skillTilesForAnimation = document.querySelectorAll(
-        ".skill-tile"
-    );
+    }, { threshold: 0, rootMargin: "-10% 0px -10% 0px" });
+    sections.forEach(section => sectionObserver.observe(section));
 
     const tileObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            entry.target.classList.toggle(
-                "is-visible",
-                entry.isIntersecting
-            );
+            entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
-    }, {
-        threshold: 0.05,
-        rootMargin: "0px 0px -20px 0px"
-    });
+    }, { threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
+    tiles.forEach(tile => tileObserver.observe(tile));
 
-    skillTilesForAnimation.forEach(tile => {
-        tile.classList.add("skill-reveal");
-        tileObserver.observe(tile);
-    });
-
-    // Reveal tiles when switching categories.
-    skillTabs.forEach(tab => {
+    // Switching tabs makes newly unhidden tiles eligible for fresh reveals.
+    document.querySelectorAll("[data-skill-filter]").forEach(tab => {
         tab.addEventListener("click", () => {
-            const activeGroup = document.querySelector(
-                `[data-skill-group="${tab.dataset.skillFilter}"]`
-            );
-
-            activeGroup?.querySelectorAll(".skill-tile").forEach(tile => {
+            const active = document.querySelector(`[data-skill-group="${tab.dataset.skillFilter}"]`);
+            active?.querySelectorAll(".skill-tile").forEach(tile => {
                 tile.classList.add("is-visible");
             });
         });
     });
+}
 
-    root.classList.add("motion-ready");
+
+/**
+ * Build an email draft using validated form values.
+ * GitHub Pages hosts static files only: no server submission is claimed.
+ * Users must explicitly send the draft in their own email application.
+ */
+function initContactForm() {
+    const form = document.querySelector("#contact-form");
+    const feedback = document.querySelector("#contact-form-feedback");
+    if (!form) return;
+
+    form.addEventListener("submit", event => {
+        if (!form.reportValidity()) {
+            event.preventDefault();
+            return;
+        }
+
+        event.preventDefault();
+        const fields = new FormData(form);
+        const name = String(fields.get("name") || "").trim();
+        const email = String(fields.get("email") || "").trim();
+        const subject = String(fields.get("subject") || "").trim();
+        const message = String(fields.get("message") || "").trim();
+        if (!name || !email || !subject || message.length < 10) return;
+
+        const body = `Name: ${name}\nReply-to: ${email}\n\n${message}`;
+        const draftUrl = `mailto:zm4883179@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        if (feedback) feedback.textContent = "Your email app should open with a prepared draft. Please review it and press Send there. If it does not open, use the email link on the left.";
+        window.location.href = draftUrl;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initTheme();
+    initNavigation();
+    initSkills();
+    initScrollAnimations();
+    initContactForm();
 });

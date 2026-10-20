@@ -1,0 +1,47 @@
+[
+  {
+    "width": 320,
+    "horizontal_overflow": false,
+    "logo_visible": true,
+    "theme_toggled": true,
+    "python_skill_selected": true,
+    "mobile_menu_open": "true",
+    "page_errors": []
+  },
+  {
+    "width": 375,
+    "horizontal_overflow": false,
+    "logo_visible": true,
+    "theme_toggled": true,
+    "python_skill_selected": true,
+    "mobile_menu_open": "true",
+    "page_errors": []
+  },
+  {
+    "width": 430,
+    "horizontal_overflow": false,
+    "logo_visible": true,
+    "theme_toggled": true,
+    "python_skill_selected": true,
+    "mobile_menu_open": "true",
+    "page_errors": []
+  },
+  {
+    "width": 768,
+    "horizontal_overflow": false,
+    "logo_visible": true,
+    "theme_toggled": true,
+    "python_skill_selected": true,
+    "mobile_menu_open": "desktop",
+    "page_errors": []
+  },
+  {
+    "width": 1280,
+    "horizontal_overflow": false,
+    "logo_visible": true,
+    "theme_toggled": true,
+    "python_skill_selected": true,
+    "mobile_menu_open": "desktop",
+    "page_errors": []
+  }
+]
